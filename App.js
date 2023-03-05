@@ -2,8 +2,6 @@ import * as React from "react";
 import { View, TouchableWithoutFeedback, Text, Button, StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { GLView } from "expo-gl";
-import { Renderer } from "expo-three";
 import { SafeAreaView } from 'react-native'
 import { useFrame, Canvas } from '@react-three/fiber'
 
