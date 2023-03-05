@@ -4,8 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GLView } from "expo-gl";
 import { Renderer } from "expo-three";
-//import { useGLTF } from '@react-three/drei';
-//import { Canvas } from "@react-three/fiber";
+import { SafeAreaView } from 'react-native'
+import { useFrame, Canvas } from '@react-three/fiber'
+
+
 import {
   AmbientLight,
   SphereGeometry,
@@ -18,8 +20,32 @@ import {
   Scene,
   SpotLight,
   MeshLambertMaterial,
-} from "three";;
+} from "three";
 
+function Box() {
+  const box = React.useRef()
+  useFrame(() => (box.current.rotation.x = box.current.rotation.y += 0.01))
+  return (
+    <mesh ref={box}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshPhysicalMaterial color="blue" />
+    </mesh>
+  )
+}
+
+function Image({navigation}) {
+  return(
+    <SafeAreaView style={{ flex: 1 }}>
+      <Canvas>
+        <ambientLight />
+        <pointLight position={[-1, 1, 1]} castShadow />
+        <Box />
+      </Canvas>
+    </SafeAreaView>
+  )
+}
+
+/*
 function Image({navigation}){
   const sphere = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshLambertMaterial({color:0xffff00}));
   const camera = new PerspectiveCamera(100, 0.4, 0.01, 1000);
@@ -69,6 +95,7 @@ function Image({navigation}){
     </View>
   );
 }
+*/
 function HomeScreen({navigation}){
 
   return(
