@@ -3,8 +3,10 @@ import { View, TouchableWithoutFeedback, Text, Button, StyleSheet } from "react-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native'
-import { useFrame, Canvas } from '@react-three/fiber'
-
+import { useFrame, Canvas, useLoader } from '@react-three/fiber'
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Environment } from "@react-three/drei";
+import { Model } from "./assets/Untitled";
 
 import {
   AmbientLight,
@@ -32,12 +34,15 @@ function Box() {
 }
 
 function Image({navigation}) {
+  //const gltf = useLoader(GLTFLoader, './assetsr/Avocado.gltf')
   return(
     <SafeAreaView style={{ flex: 1 }}>
       <Canvas>
-        <ambientLight />
-        <pointLight position={[-1, 1, 1]} castShadow />
-        <Box />
+        <ambientLight/>
+        <mesh scale={0.1}>
+          <torusKnotGeometry borderRadius = {10} args={[10,1,260,6,10,16]}/>
+          <meshStandardMaterial color={'green'}/>
+        </mesh>
       </Canvas>
     </SafeAreaView>
   )
